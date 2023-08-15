@@ -10,18 +10,13 @@ import threadpool
 
 include "roll.nim"
 
-# Evil CouchOS (Dev Bot 1)
-const applicationID = "965556376606748694"
-let discord = newDiscordClient("OTY1NTU2Mzc2NjA2NzQ4Njk0.GmHB30.2Kvg3K0qc-bkDxsgu8j4XV-HHvNFoxx24-F30M")
-
-# bott (Dev Bot 2)
-# const applicationID = "273450045913956353"
-# let discord = newDiscordClient("MjczNDUwMDQ1OTEzOTU2MzUz.Gwgfs1.8hSFkljuIZVVpkMyZzzlXnCzDA85x_BcQ7ushc")
+const applicationID = ""
+let discord = newDiscordClient("{insert bot token}")
 
 var cmd = discord.newHandler()
 
 when defined(debug):
-  const defaultGuildID = "273450731544248320"
+  const defaultGuildID = "{insert guild id}"
 else:
   const defaultGuildID = ""
 
