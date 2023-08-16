@@ -26,13 +26,6 @@ when defined(debug):
 else:
   const defaultGuildID = ""
 
-if applicationID == "":
-  echo "WARNING: Editing messages wont work without -d:applicationID={applicationIDValue}"
-
-if token == "":
-  echo "You need to insert a token with -d:token={tokenValue}"
-  quit(1)
-
 let discord = newDiscordClient(token)
 
 var cmd = discord.newHandler()
