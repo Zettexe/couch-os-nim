@@ -1,0 +1,6 @@
+--threads:on
+-d:ssl
+-d:dimscordVoice
+-d:token="<bot token here>"
+-d:applicationID="<bot application id here>"
+-d:guildID="<guild id here>"

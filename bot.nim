@@ -10,24 +10,38 @@ import threadpool
 
 include "roll.nim"
 
-const applicationID = ""
-let discord = newDiscordClient("{insert bot token}")
-
-var cmd = discord.newHandler()
+# Don't insert the actual values here
+const token {.strdefine.} = "<your token>"
+const guildID {.strdefine.} = ""
+const applicationID {.strdefine.} = ""
 
 when defined(debug):
-  const defaultGuildID = "{insert guild id}"
+  const defaultGuildID = guildID
+  if defaultGuildID == "":
+    stdout.write "Are you sure you want to register all commands as global commands? (y/N): "
+    let answer = readLine(stdin)
+    
+    if answer.strip.toLowerAscii() != "y":
+      quit(1)
 else:
   const defaultGuildID = ""
+
+if applicationID == "":
+  echo "WARNING: Editing messages wont work without -d:applicationID={applicationIDValue}"
+
+if token == "":
+  echo "You need to insert a token with -d:token={tokenValue}"
+  quit(1)
+
+let discord = newDiscordClient(token)
+
+var cmd = discord.newHandler()
 
 const dns = "http://localhost"
 const port = 10000
 
 # Handle event for on_ready.
 proc onReady(s: Shard, r: Ready) {.event(discord).} =
-  # echo "Overwriting Commands..."
-  # discard await discord.api.bulkOverwriteApplicationCommands(s.user.id, @[])
- 
   when not defined(debug):
     for g in r.guilds:
       let guild = await discord.api.getGuild(g.id)
